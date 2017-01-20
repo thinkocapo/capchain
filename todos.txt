@@ -1,0 +1,119 @@
+TODOS -
+
+Multiple EVM instances - pretty sure - maybe doesn't matter for purpose of my application, for now
+Node per user - pretty sure. (not EVM per user, but double check)
+Node validates transaction and EVM state (evm.blockchain state?)
+Relationship between node and EVM? Is client running an EVM or just a node?
+Figure out if its many nodes composing 1 single EVM (that's distributed worldwide)
+
+The formal execution model of EVM code is surprisingly simple.
+While the Ethereum virtual machine is running, its full computational state can be defined by the tuple (block_state, transaction, message, code, memory, stack, pc, gas), where block_state is the global state containing all accounts and includes balances and storage.
+
+Note that "contracts" in Ethereum should not be seen as something that should be "fulfilled" or "complied with"; rather, they are more like "autonomous agents" that live inside of the Ethereum execution environment, always executing a specific piece of code when "poked" by a message or transaction, and having direct control over their own ether balance and their own key/value store to keep track of persistent variables.
+
+**
+Blockchain --> Blocks --> Transactions <-- produced by ExternallyOwnedAccounts + Contract Accounts <-- manipulated by Nodes(Users)
+The Blockchain and its Blocks are stored in EVM's State, and ExternallyOwnedAccounts + Contract Accounts help comprise the State as well
+
+*Ethereum state is made up of accounts - EO Accounts or Contract Accounts
+	-node adds an EO to the Ethereum state?
+	-node adds contracts
+	
+Interface - verification, hashing, import java.security
+
+Private Key (ExternallyOwnedAccounts) Public Key (Addresses)
+
+Buffers, for node to process TX History?
+
+***Consider making 2 Collections (1. EOA 2.CA) isntead of Arrays of EOA CA
+	-I think this is actually stored in a tree? millions of objects in a tree
+	
+***But still use LinkdList for blockhain, and maybe tx history (or merkle tree)
+
+*what's in block header?*
+
+**EVM should have a stack - representing what it is doing - what's going to happen
+	-word-addressed byte array
+	
+*Byte Arrays* stores binary>
+
+*escrow in the blockchain (block? where specifically again?) between Alice and Bob's transaction
+
+*Generic Types*
+
+*Account - indexed by its address.
+The account state comprises the following four fields:
+nonce: A scalar value equal to the number of transactions
+sent from this address or, in the case
+of accounts with associated code, the number of
+contract-creations made by this account. For account
+of address a in state σ, this would be formally
+denoted σ[a]n.
+
+balance: A scalar value equal to the number of Wei
+owned by this address. Formally denoted σ[a]b.
+
+storageRoot: A 256-bit hash of the root node of a
+Merkle Patricia tree that encodes the storage contents
+of the account (a mapping between 256-bit
+integer values), encoded into the trie as a mapping
+from the Keccak 256-bit hash of the 256-bit
+integer keys to the RLP-encoded 256-bit integer
+values. The hash is formally denoted σ[a]s.
+
+codeHash: The hash of the EVM code of this
+account—this is the code that gets executed
+should this address receive a message call; it is
+immutable and thus, unlike all other fields, cannot
+be changed after construction. All such code
+fragments are contained in the state database under
+their corresponding hashes for later retrieval.
+This hash is formally denoted σ[a]c, and thus the
+code may be denoted as b, given that KEC(b) =
+σ[a]c.
+
+---------
+TEST - 
+Develop a JUnit test
+
+
+
+
+-----------
+A. Sounds like node is simply verifying transactions with the EVM...
+Ethereum has two types of accounts. Externally owned accounts (accounts owned by people) and contract accounts which contain the EVM bytecode which are encoded VM instructions that can change its contract storage contents through Ethereum's state transition function. Once you upload a contract's EVM bytecode (which are a set of rules that change the contract's storage data) and it gets included into the blockchain then you can't alter its contents. You can execute the contract it by sending encoded (which contain the pointer to the function in the bytecode that you want to call with the data that you want to pass it. 
+Nodes are not "executing" any code like it would an application that is running on your computer.
+ They are verifying blocks which contain transactions which change the state of the Ethereum Virtual Machine. 
+Each new block contains the SHA3 signatures of each transactions' header that are included in it. The transactions change the state of the EVM through the aforementioned state transition function. Every node that is in agreement will have the same EVM state.
+
+All action on the Ethereum block chain is set in motion by transactions fired from externally owned accounts. Every time a contract account receives a transaction, its code is executed as instructed by the input parameters sent as part of the transaction. The contract code is executed by the Ethereum Virtual Machine on each node participating in the network as part of their verification of new blocks.
+
+
+
+
+--------------
+TODOS - QUESTIONS
+What kind of hashes - github Wiki
+---------------
+RESEARCH
+nodes are in coinbase?
+
+-
+goethereum CLI - connect to Test network...
+
+
+mycelieum - wallet application 
+bitcoin wallet - ?
+
+did you use PGP?
+
+gmail calendar
+
+plugin for saving favorites?
+
+
+X-Team Application - design. Sequence client & Resource, Rest/sequences --> select type based on map. -->ComponentService 
+clarify why the hard-coding was okay
+
+
+----------------
