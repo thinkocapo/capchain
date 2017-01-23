@@ -12,6 +12,9 @@ A future example I'd like to incorporate is a voting system.
 Capchain does not cover the Merkle Tree that's used in a real blockchain. Though there are java libraries available for working
 with Merkle Trees for the future.
 
+Challenge:
+When users execute contracts, they amounts and types of arguments are arbitrary, because the contract could be for anything. This was difficult to code because Java is a static-typed language. So I designed Capchain so that any contract you create is an anonymous function. I used java 8 lambda functions to help accomplish this. E.g. the Contract for userA-pays-userB takes as arguments an ID of the user you want to pay, and the amount you want to pay them.
+
 https://github.com/thinkocapo/capchain/blob/master/test/dao/evm/CapchainSimulationTest.java
 
 Here are some basic java classes and vocab that get used in Blockchain. These were the concepts I really wanted to learn well.
